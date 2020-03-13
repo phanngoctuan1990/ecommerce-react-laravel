@@ -4,7 +4,7 @@ namespace App\Contracts\Mail;
 
 interface VerifyMailAdapter
 {
-    const IS_VALID=true;
+    const IS_VALID = true;
 
     /**
      * Set email
