@@ -16,14 +16,14 @@ class AuthController extends BaseApiController
     /**
      * Create a new controller instance.
      *
-     * @param AuthenticateService $authService  auth service
      * @param UsersService        $usersService user service
+     * @param AuthenticateService $authService  auth service
      *
      * @return void
      */
     public function __construct(
-        AuthenticateService $authService,
-        UsersService $usersService
+        UsersService $usersService,
+        AuthenticateService $authService
     ) {
         $this->authService = $authService;
         $this->usersService = $usersService;

@@ -10,7 +10,7 @@ use Exception;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
 
-class UsersService
+class UsersService extends BaseService
 {
     protected $request;
     protected $userRepository;
@@ -71,7 +71,7 @@ class UsersService
                     'second_address' => $this->request['second_address'],
                 ]);
                 return $user;
-            }, 5);
+            }, self::ATTEMPTS_COUNT);
             return $user;
         } catch (Exception $e) {
             Log::error($e);

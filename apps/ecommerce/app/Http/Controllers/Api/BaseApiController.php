@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-
 class BaseApiController extends Controller
 {
     /**
      * success response method.
      *
-     * @return \Illuminate\Http\Response
+     * @param array $data       data
+     * @param int   $statusCode status code
+     *
+     * @return json
      */
     public function sendResponse($data, $statusCode = 200)
     {

@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Exceptions\ApiException;
 
-class AuthenticateService
+class AuthenticateService extends BaseService
 {
     protected $request;
     protected $_request;
