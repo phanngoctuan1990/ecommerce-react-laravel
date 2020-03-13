@@ -114,4 +114,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'client_id' => env('CLIENT_ID'),
+    'client_secret' => env('CLIENT_SECRET'),
 ];
