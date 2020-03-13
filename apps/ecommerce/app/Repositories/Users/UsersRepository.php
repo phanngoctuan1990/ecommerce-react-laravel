@@ -7,6 +7,7 @@ use App\User;
 class UsersRepository implements UsersRepositoryInterface
 {
     protected $user;
+    protected $userData;
 
     /**
      * Construct UsersRepository
@@ -21,14 +22,23 @@ class UsersRepository implements UsersRepositoryInterface
     }
 
     /**
-     * Store user
+     * Set user data
      *
      * @param array $data data
+     */
+    public function setUserData(array $data): UsersRepository
+    {
+        $this->userData = $data;
+        return $this;
+    }
+
+    /**
+     * Store user
      *
      * @return User
      */
-    public function store(array $data) :User
+    public function store(): User
     {
-        return $this->user->create($data);
+        return $this->user->create($this->userData);
     }
 }

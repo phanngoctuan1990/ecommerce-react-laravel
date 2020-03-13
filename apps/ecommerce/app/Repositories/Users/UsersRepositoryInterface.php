@@ -5,9 +5,14 @@ namespace App\Repositories\Users;
 interface UsersRepositoryInterface
 {
     /**
-     * Store user
+     * Set user data
      *
      * @param array $data data
      */
-    public function store(array $data);
+    public function setUserData(array $data);
+
+    /**
+     * Store user
+     */
+    public function store();
 }
