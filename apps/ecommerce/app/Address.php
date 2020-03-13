@@ -11,5 +11,21 @@ class Address extends Model
      *
      * @var string
      */
-    protected $table = "address";
+    protected $table = 'address';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'zip',
+        'city',
+        'state',
+        'phone',
+        'user_id',
+        'edit_disabled',
+        'first_address',
+        'second_address',
+    ];
 }
