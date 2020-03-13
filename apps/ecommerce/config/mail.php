@@ -97,4 +97,6 @@ return [
         ],
     ],
 
+    'verfifalia_id' => env('VERIFALIA_ID'),
+    'verfifalia_password' => env('VERIFALIA_PASSWORD'),
 ];

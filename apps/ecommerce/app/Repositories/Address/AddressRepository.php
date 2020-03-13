@@ -7,6 +7,7 @@ use App\Address;
 class AddressRepository implements AddressRepositoryInterface
 {
     protected $address;
+    protected $addressData;
 
     /**
      * Construct AddressRepository
@@ -21,14 +22,23 @@ class AddressRepository implements AddressRepositoryInterface
     }
 
     /**
-     * Store address
+     * Set address data
      *
      * @param array $data data
+     */
+    public function setAddressData(array $data): AddressRepository
+    {
+        $this->addressData = $data;
+        return $this;
+    }
+
+    /**
+     * Store address
      *
      * @return Address
      */
-    public function store(array $data): Address
+    public function store(): Address
     {
-        return $this->address->create($data);
+        return $this->address->create($this->addressData);
     }
 }

@@ -54,22 +54,26 @@ class UsersService extends BaseService
     {
         try {
             $user = DB::transaction(function () {
-                $user = $this->userRepository->store([
-                    'name' => $this->request['name'],
-                    'email' => $this->request['email'],
-                    'userTypeId' => User::TYPE_BUYER,
-                    'password' => Hash::make($this->request['password']),
-                ]);
+                $user = $this->userRepository
+                    ->setUserData([
+                        'name' => $this->request['name'],
+                        'email' => $this->request['email'],
+                        'userTypeId' => User::TYPE_BUYER,
+                        'password' => Hash::make($this->request['password']),
+                    ])
+                    ->store();
 
-                $this->addressRepository->store([
-                    'user_id' => $user->id,
-                    'zip' => $this->request['zip'],
-                    'city' => $this->request['city'],
-                    'state' => $this->request['state'],
-                    'phone' => $this->request['phone'],
-                    'first_address' => $this->request['first_address'],
-                    'second_address' => $this->request['second_address'],
-                ]);
+                $this->addressRepository
+                    ->setAddressData([
+                        'user_id' => $user->id,
+                        'zip' => $this->request['zip'],
+                        'city' => $this->request['city'],
+                        'state' => $this->request['state'],
+                        'phone' => $this->request['phone'],
+                        'first_address' => $this->request['first_address'],
+                        'second_address' => $this->request['second_address'],
+                    ])
+                    ->store();
                 return $user;
             }, self::ATTEMPTS_COUNT);
             return $user;

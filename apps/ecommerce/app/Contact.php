@@ -11,5 +11,14 @@ class Contact extends Model
      *
      * @var string
      */
-    protected $table = "contacts";
+    protected $table = 'contacts';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'message', 'is_valid',
+    ];
 }

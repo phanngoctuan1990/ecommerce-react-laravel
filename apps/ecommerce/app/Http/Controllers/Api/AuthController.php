@@ -38,7 +38,6 @@ class AuthController extends BaseApiController
      */
     public function login(LoginRequest $request)
     {
-
         return $this->sendResponse(
             $this->authService
                 ->setRequest($request)
