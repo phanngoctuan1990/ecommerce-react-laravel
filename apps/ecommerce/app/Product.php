@@ -14,5 +14,13 @@ class Product extends Model
      *
      * @var string
      */
-    protected $table = "products";
+    protected $table = 'products';
+
+    /**
+     * Get image by product
+     */
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
 }
