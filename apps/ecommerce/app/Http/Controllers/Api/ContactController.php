@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Services\ContactsService;
 use App\Http\Requests\ContactRequest;
 

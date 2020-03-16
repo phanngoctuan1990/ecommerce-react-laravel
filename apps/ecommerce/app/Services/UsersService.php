@@ -4,30 +4,37 @@ namespace App\Services;
 
 use DB;
 use Log;
-use Hash;
+// use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use Exception;
+use App\Exceptions\ApiException;
+use App\Contracts\Mail\VerifyMailAdapter;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
 
 class UsersService extends BaseService
 {
     protected $request;
+    protected $verifyMail;
     protected $userRepository;
     protected $addressRepository;
 
     /**
      * Create a new controller instance.
      *
+     * @param VerifyMailAdapter          $verifyMail        verify email
      * @param UsersRepositoryInterface   $userRepository    user repository
      * @param AddressRepositoryInterface $addressRepository address repository
      *
      * @return void
      */
     public function __construct(
+        VerifyMailAdapter $verifyMail,
         UsersRepositoryInterface $userRepository,
         AddressRepositoryInterface $addressRepository
     ) {
+        $this->verifyMail = $verifyMail;
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
     }
@@ -52,6 +59,14 @@ class UsersService extends BaseService
      */
     public function registerUser(): User
     {
+        $verifyEmail = $this->verifyMail
+            ->setEmail($this->request['email'])
+            ->verify();
+
+        if (!$verifyEmail) {
+            throw new ApiException('Your email not exists, please change to another', 400);
+        }
+
         try {
             $user = DB::transaction(function () {
                 $user = $this->userRepository

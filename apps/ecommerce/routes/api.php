@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api'], function () {
+    Route::get('/subcategories/{category}', 'CategoryController@subCategories');
+    Route::get('/products/{subcategory}', 'CategoryController@getProductsBySubcategory');
+    // Route::get('/products/{id}', 'ProductController@show');
     Route::post('/login', 'AuthController@login');
     Route::post('/register', 'AuthController@register');
     Route::post('/contact', 'ContactController@store');
