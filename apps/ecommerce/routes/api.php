@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/refresh-token', 'AuthController@refreshToken');
         Route::post('/addtocart', 'ShoppingCartController@addToCart');
+        Route::delete('/removefromcart/{product_id}', 'ShoppingCartController@removeFromCart');
     });
 });
 

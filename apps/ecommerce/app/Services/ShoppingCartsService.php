@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\ShoppingCarts\ShoppingCartsRepositoryInterface;
 
 class ShoppingCartsService extends BaseService
 {
     protected $request;
+    protected $productId;
     protected $shoppingCartRepo;
 
     /**
@@ -35,6 +37,19 @@ class ShoppingCartsService extends BaseService
     }
 
     /**
+     * Set product id
+     *
+     * @param int productId product id
+     *
+     * @return ShoppingCartsService
+     */
+    public function setProductId(int $productId): ShoppingCartsService
+    {
+        $this->productId = $productId;
+        return $this;
+    }
+
+    /**
      * Add to cart
      *
      * @return void
@@ -45,7 +60,7 @@ class ShoppingCartsService extends BaseService
             ->setShoppingCartData([
                 'wish_list' => false,
                 'is_expired' => false,
-                'user_id' => $this->request->user()->id,
+                'user_id' => Auth::user()->id,
                 'product_id' => $this->request->product_id
             ])
             ->firstOrCreate();
@@ -54,5 +69,21 @@ class ShoppingCartsService extends BaseService
             ->setShoppingCartId($shoppingCart->id)
             ->setShoppingCartData(['quantity' => $this->request->quantity])
             ->updateById();
+    }
+
+    /**
+     * Remove from cart
+     *
+     * @return void
+     */
+    public function removeFromCart()
+    {
+        $this->shoppingCartRepo
+            ->setConditions([
+                'wish_list' => false,
+                'user_id' => Auth::user()->id,
+                'product_id' => $this->productId,
+            ])
+            ->deleteByConditions();
     }
 }

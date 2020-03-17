@@ -40,6 +40,18 @@ interface ShoppingCartsRepositoryInterface
     public function setProductsId(array $productsId);
 
     /**
+     * Set conditions
+     *
+     * @param array $conditions conditions
+     */
+    public function setConditions(array $conditions);
+
+    /**
+     * Delete by conditions
+     */
+    public function deleteByConditions();
+
+    /**
      * Update shopping cart by products id, wish list, user id
      */
     public function updateByProductsIdWishListUserId();

@@ -33,4 +33,17 @@ class ShoppingCartController extends BaseApiController
         $this->shoppingCartService->setRequest($request)->addToCart();
         return $this->sendResponse(['message' => 'Added to cart']);
     }
+
+    /**
+     * Add to cart.
+     *
+     * @param int $productId product id
+     *
+     * @return json
+     */
+    public function removeFromCart(int $productId)
+    {
+        $this->shoppingCartService->setProductId($productId)->removeFromCart();
+        return $this->sendResponse(['message' => 'Removed to cart']);
+    }
 }
