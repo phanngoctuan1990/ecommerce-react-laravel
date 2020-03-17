@@ -6,6 +6,7 @@ use App\ShoppingCart;
 
 class ShoppingCartsRepository implements ShoppingCartsRepositoryInterface
 {
+    protected $id;
     protected $userId;
     protected $wishList;
     protected $productsId;
@@ -34,6 +35,17 @@ class ShoppingCartsRepository implements ShoppingCartsRepositoryInterface
     public function setShoppingCartData(array $data): ShoppingCartsRepository
     {
         $this->shoppingCartData = $data;
+        return $this;
+    }
+
+    /**
+     * Set shopping cart id
+     *
+     * @param int $id shopping cart id
+     */
+    public function setShoppingCartId(int $id): ShoppingCartsRepository
+    {
+        $this->id = $id;
         return $this;
     }
 
@@ -87,6 +99,28 @@ class ShoppingCartsRepository implements ShoppingCartsRepositoryInterface
             ->whereUserId($this->userId)
             ->whereWishList($this->wishList)
             ->whereIn('product_id', $this->productsId)
+            ->update($this->shoppingCartData);
+    }
+
+    /**
+     * First or create
+     *
+     * @return ShoppingCart
+     */
+    public function firstOrCreate(): ShoppingCart
+    {
+        return $this->shoppingCart->firstOrCreate($this->shoppingCartData);
+    }
+
+    /**
+     * Update by id
+     *
+     * @return bool
+     */
+    public function updateById(): bool
+    {
+        return $this->shoppingCart
+            ->whereId($this->id)
             ->update($this->shoppingCartData);
     }
 }

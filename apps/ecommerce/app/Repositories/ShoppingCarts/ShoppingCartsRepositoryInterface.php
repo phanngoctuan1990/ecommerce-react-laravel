@@ -12,6 +12,13 @@ interface ShoppingCartsRepositoryInterface
     public function setUserId(int $userId);
 
     /**
+     * Set shopping cart id
+     *
+     * @param int $id shopping cart id
+     */
+    public function setShoppingCartId(int $id);
+
+    /**
      * Set shopping cart data
      *
      * @param array $data shopping cart data
@@ -36,4 +43,14 @@ interface ShoppingCartsRepositoryInterface
      * Update shopping cart by products id, wish list, user id
      */
     public function updateByProductsIdWishListUserId();
+
+    /**
+     * Update shopping cart by id
+     */
+    public function updateById();
+
+    /**
+     * First or create
+     */
+    public function firstOrCreate();
 }
