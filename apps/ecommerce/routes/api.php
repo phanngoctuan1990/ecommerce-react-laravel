@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api'], function () {
     Route::get('/subcategories/{category}', 'CategoryController@subCategories');
-    Route::get('/products/{subcategory}', 'CategoryController@getProductsBySubcategory');
-    // Route::get('/products/{id}', 'ProductController@show');
+    Route::get('/categories/{subcategory}', 'CategoryController@getProductsBySubcategory');
+    Route::get('/products', 'ProductController@search');
+    Route::get('/products/{id}', 'ProductController@show');
     Route::post('/login', 'AuthController@login');
     Route::post('/register', 'AuthController@register');
     Route::post('/contact', 'ContactController@store');
+    Route::post('/placeorder', 'OrderController@placeOrder');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/refresh-token', 'AuthController@refreshToken');

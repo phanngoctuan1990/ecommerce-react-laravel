@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use Log;
-use Route;
 use Exception;
 use Illuminate\Http\Request;
 use App\Exceptions\ApiException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 class AuthenticateService extends BaseService
 {

@@ -11,5 +11,14 @@ class OrderItem extends Model
      *
      * @var string
      */
-    protected $table = "order_items";
+    protected $table = 'order_items';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'quantity', 'product_id', 'price', 'order_id'
+    ];
 }

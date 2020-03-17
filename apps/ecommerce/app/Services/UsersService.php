@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use DB;
-use Log;
-// use Hash;
-use Illuminate\Support\Facades\Hash;
 use App\User;
 use Exception;
 use App\Exceptions\ApiException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use App\Contracts\Mail\VerifyMailAdapter;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;

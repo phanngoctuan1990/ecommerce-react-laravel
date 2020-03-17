@@ -14,5 +14,14 @@ class Order extends Model
      *
      * @var string
      */
-    protected $table = "orders";
+    protected $table = 'orders';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'order_date', 'total_amount', 'payment_id', 'user_id', 'shipping_option_id', 'promotion_code_id',
+    ];
 }

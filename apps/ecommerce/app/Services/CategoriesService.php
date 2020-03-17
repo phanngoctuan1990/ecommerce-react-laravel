@@ -45,16 +45,15 @@ class CategoriesService  extends BaseService
             ->setSubCategory($this->subCategory)
             ->firstBySubCategory();
 
-        $products = [
-            'featured' => [],
-            'new_arrivals' => [],
-        ];
-
-        if ($category) {
-            $products['featured'] = $category->featured->load('image');
-            $products['new_arrivals'] = $category->new_arrivals->load('image');
+        if (!$category) {
+            return [
+                'featured' => [],
+                'new_arrivals' => [],
+            ];
         }
 
-        return $products;
+        return $this->categoryRepo
+            ->setCategory($category)
+            ->getFeaturedAndNewArrivalsWithImageByCategory();
     }
 }
