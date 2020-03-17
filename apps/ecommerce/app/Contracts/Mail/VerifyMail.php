@@ -2,9 +2,9 @@
 
 namespace App\Contracts\Mail;
 
-use Log;
 use Exception;
 use Verifalia\VerifaliaRestClient;
+use Illuminate\Support\Facades\Log;
 
 class VerifyMail implements VerifyMailAdapter
 {

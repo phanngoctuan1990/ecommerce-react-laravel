@@ -4,11 +4,10 @@ namespace App\Services;
 
 use App\Payment;
 use App\ShippingOption;
-use App\Mail\OrderPlaced;
 use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
+use App\Contracts\Mail\MailAdapter;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use App\Contracts\Mail\VerifyMailAdapter;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Orders\OrdersRepositoryInterface;
@@ -20,6 +19,7 @@ use App\Repositories\UserPromotionCodes\UserPromotionCodesRepositoryInterface;
 
 class OrdersService extends BaseService
 {
+    protected $mail;
     protected $request;
     protected $verifyMail;
     protected $paymentRepo;
@@ -33,6 +33,7 @@ class OrdersService extends BaseService
     /**
      * Create a new controller instance.
      *
+     * @param MailAdapter                           $mail                mail
      * @param VerifyMailAdapter                     $verifyMail          verify email
      * @param UsersRepositoryInterface              $userRepository      user repository
      * @param OrdersRepositoryInterface             $orderRepository     order repository
@@ -45,6 +46,7 @@ class OrdersService extends BaseService
      * @return void
      */
     public function __construct(
+        MailAdapter $mail,
         VerifyMailAdapter $verifyMail,
         PaymentsRepositoryInterface $paymentRepo,
         UsersRepositoryInterface $userRepository,
@@ -54,6 +56,7 @@ class OrdersService extends BaseService
         PaymentMethodsRepositoryInterface $paymentMethodRepo,
         UserPromotionCodesRepositoryInterface $userPromoCodeRepo
     ) {
+        $this->mail = $mail;
         $this->verifyMail = $verifyMail;
         $this->paymentRepo = $paymentRepo;
         $this->userRepository = $userRepository;
@@ -157,7 +160,11 @@ class OrdersService extends BaseService
                         ->updateByProductsIdWishListUserId();
                 }
             }, self::ATTEMPTS_COUNT);
-            Mail::to($this->request->email)->send(new OrderPlaced($this->request->all()));
+
+            $this->mail
+                ->setMailTo($this->request->email)
+                ->setDetail($this->request->all())
+                ->sendMailOrderPlaced();
         } catch (\Exception $e) {
             Log::error($e);
             throw $e;
