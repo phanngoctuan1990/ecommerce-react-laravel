@@ -13,8 +13,6 @@ interface AddressRepositoryInterface
 
     /**
      * Store address
-     *
-     * @param array $data data
      */
-    public function store(array $data);
+    public function store();
 }

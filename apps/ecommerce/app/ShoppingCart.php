@@ -14,5 +14,14 @@ class ShoppingCart extends Model
      *
      * @var string
      */
-    protected $table = "shopping_carts";
+    protected $table = 'shopping_carts';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'product_id', 'user_id', 'wish_list', 'is_expired', 'quantity'
+    ];
 }

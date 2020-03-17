@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/refresh-token', 'AuthController@refreshToken');
+        Route::post('/addtocart', 'ShoppingCartController@addToCart');
     });
 });
 
