@@ -9,6 +9,7 @@ class ShoppingCartsRepository implements ShoppingCartsRepositoryInterface
     protected $id;
     protected $userId;
     protected $wishList;
+    protected $conditions;
     protected $productsId;
     protected $shoppingCart;
     protected $shoppingCartData;
@@ -86,6 +87,29 @@ class ShoppingCartsRepository implements ShoppingCartsRepositoryInterface
     {
         $this->productsId = $productsId;
         return $this;
+    }
+
+    /**
+     * Set conditions
+     *
+     * @param array $conditions conditions
+     *
+     * @return ShoppingCartsRepository
+     */
+    public function setConditions(array $conditions): ShoppingCartsRepository
+    {
+        $this->conditions = $conditions;
+        return $this;
+    }
+
+    /**
+     * Delete by conditions
+     *
+     * @return bool
+     */
+    public function deleteByConditions(): bool
+    {
+        return $this->shoppingCart->where($this->conditions)->delete();
     }
 
     /**
