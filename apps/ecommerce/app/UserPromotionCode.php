@@ -11,5 +11,14 @@ class UserPromotionCode extends Model
      *
      * @var string
      */
-    protected $table = "user_promotion_codes";
+    protected $table = 'user_promotion_codes';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'order_id', 'promotion_code_id'
+    ];
 }

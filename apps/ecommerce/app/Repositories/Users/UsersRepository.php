@@ -7,6 +7,7 @@ use App\User;
 class UsersRepository implements UsersRepositoryInterface
 {
     protected $user;
+    protected $email;
     protected $userData;
 
     /**
@@ -30,6 +31,27 @@ class UsersRepository implements UsersRepositoryInterface
     {
         $this->userData = $data;
         return $this;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email email
+     */
+    public function setEmail(string $email): UsersRepository
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get user by email
+     *
+     * @return User
+     */
+    public function getUserByEmail()
+    {
+        return $this->user->whereEmail($this->email)->first();
     }
 
     /**

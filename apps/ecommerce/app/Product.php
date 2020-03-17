@@ -23,4 +23,12 @@ class Product extends Model
     {
         return $this->hasOne(Image::class);
     }
+
+    /**
+     * Get category by product
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

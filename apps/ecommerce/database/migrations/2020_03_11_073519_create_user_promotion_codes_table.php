@@ -15,10 +15,9 @@ class CreateUserPromotionCodesTable extends Migration
     {
         Schema::create('user_promotion_codes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('promotion_code_id');
-            $table->foreign('promotion_code_id')->references('id')->on('promotion_codes');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->unsignedBigInteger('promotion_code_id')->nullable();
             $table->timestamps();
         });
     }

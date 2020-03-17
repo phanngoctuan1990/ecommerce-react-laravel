@@ -35,6 +35,19 @@ class CategoriesRepository implements CategoriesRepositoryInterface
     }
 
     /**
+     * Set category
+     *
+     * @param Category $category category
+     *
+     * @return CategoriesRepository
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
      * Get first category by sub category name
      *
      * @return Category|null
@@ -44,5 +57,18 @@ class CategoriesRepository implements CategoriesRepositoryInterface
         return $this->category
             ->where('sub_category', $this->subCategory)
             ->first();
+    }
+
+    /**
+     * Get featured and new arrivals with image by category
+     *
+     * @return array
+     */
+    public function getFeaturedAndNewArrivalsWithImageByCategory(): array
+    {
+        return [
+            'featured' => $this->category->featured->load('image'),
+            'new_arrivals' => $this->category->new_arrivals->load('image'),
+        ];
     }
 }

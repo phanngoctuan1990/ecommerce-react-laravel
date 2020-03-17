@@ -12,6 +12,18 @@ interface UsersRepositoryInterface
     public function setUserData(array $data);
 
     /**
+     * Set email
+     *
+     * @param string $email email
+     */
+    public function setEmail(string $email);
+
+    /**
+     * Get user by email
+     */
+    public function getUserByEmail();
+
+    /**
      * Store user
      */
     public function store();

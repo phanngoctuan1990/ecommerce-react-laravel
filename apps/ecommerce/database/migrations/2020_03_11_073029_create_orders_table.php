@@ -19,12 +19,10 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_amount')->default(0);
             $table->unsignedBigInteger('payment_id');
             $table->foreign('payment_id')->references('id')->on('payments');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('shipping_option_id');
             $table->foreign('shipping_option_id')->references('id')->on('shipping_options');
-            $table->unsignedBigInteger('promotion_code_id');
-            $table->foreign('promotion_code_id')->references('id')->on('promotion_codes');
+            $table->unsignedBigInteger('promotion_code_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
