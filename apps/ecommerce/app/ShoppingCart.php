@@ -24,4 +24,12 @@ class ShoppingCart extends Model
     protected $fillable = [
         'product_id', 'user_id', 'wish_list', 'is_expired', 'quantity'
     ];
+
+    /**
+     * Get product by shopping cart.
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

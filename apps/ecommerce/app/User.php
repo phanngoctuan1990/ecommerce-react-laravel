@@ -40,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get shopping cart items by user.
+     */
+    public function shoppingCartItems()
+    {
+        return $this->hasMany(ShoppingCart::class)
+            ->where('is_expired', false)
+            ->where('wish_list', false);
+    }
 }
