@@ -46,4 +46,16 @@ class ShoppingCartController extends BaseApiController
         $this->shoppingCartService->setProductId($productId)->removeFromCart();
         return $this->sendResponse(['message' => 'Removed to cart']);
     }
+
+    /**
+     * get user cart.
+     *
+     * @return json
+     */
+    public function getUserCart()
+    {
+        return $this->sendResponse(
+            $this->shoppingCartService->getUserCart()
+        );
+    }
 }

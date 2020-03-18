@@ -86,4 +86,18 @@ class ShoppingCartsService extends BaseService
             ])
             ->deleteByConditions();
     }
+
+    /**
+     * Get user cart
+     *
+     * @return void
+     */
+    public function getUserCart()
+    {
+        return Auth::user()->load([
+            'shoppingCartItems',
+            'shoppingCartItems.product',
+            'shoppingCartItems.product.image'
+        ]);
+    }
 }
