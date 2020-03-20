@@ -26,9 +26,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/refresh-token', 'AuthController@refreshToken');
-        Route::post('/addtocart', 'ShoppingCartController@addToCart');
-        Route::delete('/removefromcart/{product_id}', 'ShoppingCartController@removeFromCart');
-        Route::get('/getusercart', 'ShoppingCartController@getUserCart');
+        Route::post('/carts/add', 'ShoppingCartController@addToCart');
+        Route::delete('/carts/remove/{product_id}', 'ShoppingCartController@removeFromCart');
+        Route::get('/users/cart', 'ShoppingCartController@getUserCart');
+        Route::get('/users/wishlist', 'WishlistController@getUserWishlist');
     });
 });
 

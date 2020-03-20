@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -47,7 +46,18 @@ class User extends Authenticatable
     public function shoppingCartItems()
     {
         return $this->hasMany(ShoppingCart::class)
+            ->where('wish_list', false)
+            ->where('is_expired', false);
+    }
+
+    /**
+     * Get wish list items by user.
+     */
+    public function wishlistItems()
+    {
+        return $this->hasMany(ShoppingCart::class)
+            ->where('wish_list', true)
             ->where('is_expired', false)
-            ->where('wish_list', false);
+            ->with(['product', 'product.image']);
     }
 }
