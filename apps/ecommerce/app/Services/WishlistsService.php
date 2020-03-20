@@ -9,6 +9,7 @@ use App\Repositories\ShoppingCarts\ShoppingCartsRepositoryInterface;
 class WishlistsService extends BaseService
 {
     protected $request;
+    protected $productId;
     protected $wishlistRepo;
     protected $shoppingCartRepo;
 
@@ -29,7 +30,7 @@ class WishlistsService extends BaseService
     }
 
     /**
-     * Get user wishlist
+     * Set request
      *
      * @param AddWishlistRequest $request request
      *
@@ -38,6 +39,19 @@ class WishlistsService extends BaseService
     public function setRequest($request): WishlistsService
     {
         $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * Set product id
+     *
+     * @param int $productId product id
+     *
+     * @return WishlistsService
+     */
+    public function setProductId(int $productId): WishlistsService
+    {
+        $this->productId = $productId;
         return $this;
     }
 
@@ -76,5 +90,21 @@ class WishlistsService extends BaseService
                 'quantity' => $this->request->quantity,
             ])
             ->updateById();
+    }
+
+    /**
+     * Add wishlist
+     *
+     * @return void
+     */
+    public function removeWishlistByProductId()
+    {
+        $this->shoppingCartRepo
+            ->setConditions([
+                'wish_list' => true,
+                'user_id' => Auth::user()->id,
+                'product_id' => $this->productId,
+            ])
+            ->deleteByConditions();
     }
 }

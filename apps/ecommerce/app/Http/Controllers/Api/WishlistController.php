@@ -44,4 +44,17 @@ class WishlistController extends BaseApiController
         $this->wishlistService->setRequest($request)->addWishlist();
         return $this->sendResponse(['message' => 'Added to wishlist']);
     }
+
+    /**
+     * Remove wishlist
+     *
+     * @param int $productId product id
+     *
+     * @return json
+     */
+    public function removeWishlist(int $productId)
+    {
+        $this->wishlistService->setProductId($productId)->removeWishlistByProductId();
+        return $this->sendResponse(['message' => 'Removed from wishlist']);
+    }
 }
