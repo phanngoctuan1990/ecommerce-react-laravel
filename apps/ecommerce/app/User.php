@@ -60,4 +60,12 @@ class User extends Authenticatable
             ->where('is_expired', false)
             ->with(['product', 'product.image']);
     }
+
+    /**
+     * Get address by user.
+     */
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }
