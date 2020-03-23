@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Services\WishlistsService;
 use App\Http\Requests\AddWishlistRequest;
+use App\Http\Requests\WishlistToCartRequest;
 
 class WishlistController extends BaseApiController
 {
@@ -56,5 +57,18 @@ class WishlistController extends BaseApiController
     {
         $this->wishlistService->setProductId($productId)->removeWishlistByProductId();
         return $this->sendResponse(['message' => 'Removed from wishlist']);
+    }
+
+    /**
+     * Wishlist to cart
+     *
+     * @param WishlistToCartRequest $request request
+     *
+     * @return json
+     */
+    public function wishlistToCart(WishlistToCartRequest $request)
+    {
+        $this->wishlistService->setProductId($request->product_id)->wishlistToCart();
+        return $this->sendResponse(['message' => 'Added wishlist item to cart']);
     }
 }

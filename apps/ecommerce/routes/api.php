@@ -29,9 +29,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/carts', 'ShoppingCartController@addToCart');
         Route::delete('/carts/{product_id}', 'ShoppingCartController@removeFromCart');
         Route::get('/carts', 'ShoppingCartController@getUserCart');
-        Route::get('/wishlist', 'WishlistController@getUserWishlist');
-        Route::post('/wishlist', 'WishlistController@addWishlist');
-        Route::delete('/wishlist/{product_id}', 'WishlistController@removeWishlist');
+        Route::get('/wishlists', 'WishlistController@getUserWishlist');
+        Route::post('/wishlists', 'WishlistController@addWishlist');
+        Route::delete('/wishlists/{product_id}', 'WishlistController@removeWishlist');
+        Route::post('/wishlists/cart', 'WishlistController@wishlistToCart');
     });
 });
 

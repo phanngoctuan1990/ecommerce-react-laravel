@@ -107,4 +107,24 @@ class WishlistsService extends BaseService
             ])
             ->deleteByConditions();
     }
+
+    /**
+     * Wishlist to cart
+     *
+     * @return void
+     */
+    public function wishlistToCart()
+    {
+        $shoppingCart = $this->shoppingCartRepo
+            ->setShoppingCartData([
+                'user_id' => Auth::user()->id,
+                'product_id' => $this->productId,
+            ])
+            ->firstOrCreate();
+
+        $this->shoppingCartRepo
+            ->setShoppingCartId($shoppingCart->id)
+            ->setShoppingCartData(['wish_list' => false])
+            ->updateById();
+    }
 }
