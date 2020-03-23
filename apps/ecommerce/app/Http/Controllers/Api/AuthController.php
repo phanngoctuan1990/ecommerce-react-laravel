@@ -89,4 +89,18 @@ class AuthController extends BaseApiController
                 ->registerUser()
         );
     }
+
+    /**
+     * Get profile
+     *
+     * @return json
+     */
+    public function profile(Request $request)
+    {
+        return $this->sendResponse(
+            $this->usersService
+                ->setRequest($request)
+                ->profile()
+        );
+    }
 }

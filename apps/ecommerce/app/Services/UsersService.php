@@ -52,6 +52,16 @@ class UsersService extends BaseService
     }
 
     /**
+     * Get profile
+     *
+     * @return User
+     */
+    public function profile(): User
+    {
+        return $this->request->user()->load('address');
+    }
+
+    /**
      * Register user
      *
      * @return User|Exception
