@@ -8,6 +8,7 @@ use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Contracts\Mail\VerifyMailAdapter;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Address\AddressRepositoryInterface;
@@ -58,7 +59,7 @@ class UsersService extends BaseService
      */
     public function profile(): User
     {
-        return $this->request->user()->load('address');
+        return $this->userRepository->setUser(Auth::user())->profile();
     }
 
     /**

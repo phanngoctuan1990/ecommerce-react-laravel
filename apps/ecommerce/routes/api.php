@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +23,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/contact', 'ContactController@store');
     Route::post('/placeorder', 'OrderController@placeOrder');
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('/user', 'AuthController@profile');
+        Route::get('/users', 'AuthController@profile');
         Route::get('/logout', 'AuthController@logout');
         Route::get('/refresh-token', 'AuthController@refreshToken');
         Route::post('/carts', 'ShoppingCartController@addToCart');
@@ -34,5 +33,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/wishlists', 'WishlistController@addWishlist');
         Route::delete('/wishlists/{product_id}', 'WishlistController@removeWishlist');
         Route::post('/wishlists/cart', 'WishlistController@wishlistToCart');
+        Route::get('/users/order', 'OrderController@getUserOrders');
     });
 });
