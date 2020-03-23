@@ -34,4 +34,15 @@ class OrderController extends BaseApiController
         $this->ordersService->setRequest($request)->placeorder();
         return $this->sendResponse(['message' => 'order successfully placed']);
     }
+
+    /**
+     * Get user orders.
+     *
+     * @return json
+     */
+    public function getUserOrders()
+    {
+        $userOrders = $this->ordersService->getUserOrders();
+        return $this->sendResponse($userOrders);
+    }
 }

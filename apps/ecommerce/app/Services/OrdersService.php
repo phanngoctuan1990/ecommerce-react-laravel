@@ -2,12 +2,14 @@
 
 namespace App\Services;
 
+use App\User;
 use App\Payment;
 use App\ShippingOption;
 use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\DB;
 use App\Contracts\Mail\MailAdapter;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Contracts\Mail\VerifyMailAdapter;
 use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\Orders\OrdersRepositoryInterface;
@@ -78,6 +80,16 @@ class OrdersService extends BaseService
     {
         $this->request = $request;
         return $this;
+    }
+
+    /**
+     * Get user order
+     *
+     * @return User
+     */
+    public function getUserOrders()
+    {
+        return $this->userRepository->setUser(Auth::user())->getUserOrders();
     }
 
     /**

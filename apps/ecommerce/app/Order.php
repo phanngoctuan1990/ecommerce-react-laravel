@@ -24,4 +24,12 @@ class Order extends Model
     protected $fillable = [
         'order_date', 'total_amount', 'payment_id', 'user_id', 'shipping_option_id', 'promotion_code_id',
     ];
+
+    /**
+     * Get order items by order
+     */
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class)->select(['id', 'order_id', 'quantity', 'product_id', 'price']);
+    }
 }

@@ -34,6 +34,17 @@ class UsersRepository implements UsersRepositoryInterface
     }
 
     /**
+     * Set user
+     *
+     * @param User $user user
+     */
+    public function setUser($user): UsersRepository
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
      * Set email
      *
      * @param string $email email
@@ -52,6 +63,44 @@ class UsersRepository implements UsersRepositoryInterface
     public function getUserByEmail()
     {
         return $this->user->whereEmail($this->email)->first();
+    }
+
+    /**
+     * Get user profile
+     *
+     * @return User
+     */
+    public function profile(): User
+    {
+        return $this->user->load('address');
+    }
+
+    /**
+     * Get user cart
+     *
+     * @param User
+     */
+    public function getUserCart(): User
+    {
+        return $this->user->load([
+            'shoppingCartItems',
+            'shoppingCartItems.product',
+            'shoppingCartItems.product.image'
+        ]);
+    }
+
+    /**
+     * Get user orders
+     *
+     * @param Collection
+     */
+    public function getUserOrders()
+    {
+        return $this->user->orders->load([
+            'orderItems',
+            'orderItems.product',
+            'orderItems.product.image'
+        ]);
     }
 
     /**

@@ -2,24 +2,31 @@
 
 namespace App\Services;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\Users\UsersRepositoryInterface;
 use App\Repositories\ShoppingCarts\ShoppingCartsRepositoryInterface;
 
 class ShoppingCartsService extends BaseService
 {
     protected $request;
     protected $productId;
+    protected $userRepository;
     protected $shoppingCartRepo;
 
     /**
      * Create a new controller instance.
      *
+     * @param UsersRepositoryInterface         $userRepository   user repository
      * @param ShoppingCartsRepositoryInterface $shoppingCartRepo shopping cart repository
      *
      * @return void
      */
-    public function __construct(ShoppingCartsRepositoryInterface $shoppingCartRepo)
-    {
+    public function __construct(
+        UsersRepositoryInterface $userRepository,
+        ShoppingCartsRepositoryInterface $shoppingCartRepo
+    ) {
+        $this->userRepository = $userRepository;
         $this->shoppingCartRepo = $shoppingCartRepo;
     }
 
@@ -90,14 +97,12 @@ class ShoppingCartsService extends BaseService
     /**
      * Get user cart
      *
-     * @return void
+     * @return User
      */
-    public function getUserCart()
+    public function getUserCart(): User
     {
-        return Auth::user()->load([
-            'shoppingCartItems',
-            'shoppingCartItems.product',
-            'shoppingCartItems.product.image'
-        ]);
+        return $this->userRepository
+            ->setUser(Auth::user())
+            ->getUserCart();
     }
 }

@@ -21,4 +21,12 @@ class OrderItem extends Model
     protected $fillable = [
         'quantity', 'product_id', 'price', 'order_id'
     ];
+
+    /**
+     * Get product by order item
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->select(['id', 'name', 'price', 'seller_name', 'ratings']);
+    }
 }

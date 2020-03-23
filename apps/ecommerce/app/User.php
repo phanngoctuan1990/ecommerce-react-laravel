@@ -68,4 +68,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Address::class);
     }
+
+    /**
+     * Get orders by user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class)
+            ->orderByDesc('order_date')
+            ->select(['id', 'order_date', 'total_amount']);
+    }
 }
