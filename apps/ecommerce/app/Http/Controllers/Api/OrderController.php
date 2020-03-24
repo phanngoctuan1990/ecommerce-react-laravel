@@ -45,4 +45,17 @@ class OrderController extends BaseApiController
         $userOrders = $this->ordersService->getUserOrders();
         return $this->sendResponse($userOrders);
     }
+
+    /**
+     * Get order detail.
+     *
+     * @param int $orderId order id
+     *
+     * @return json
+     */
+    public function show(int $orderId)
+    {
+        $userOrders = $this->ordersService->setOrderId($orderId)->getOrderById();
+        return $this->sendResponse($userOrders);
+    }
 }
