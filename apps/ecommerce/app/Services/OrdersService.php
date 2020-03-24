@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\User;
+use App\Order;
 use App\Payment;
 use App\ShippingOption;
 use App\Exceptions\ApiException;
@@ -23,6 +23,7 @@ class OrdersService extends BaseService
 {
     protected $mail;
     protected $request;
+    protected $orderId;
     protected $verifyMail;
     protected $paymentRepo;
     protected $userRepository;
@@ -83,13 +84,39 @@ class OrdersService extends BaseService
     }
 
     /**
+     * Set order id
+     *
+     * @param int orderId orderId
+     *
+     * @return OrdersService
+     */
+    public function setOrderId(int $orderId): OrdersService
+    {
+        $this->orderId = $orderId;
+        return $this;
+    }
+
+    /**
      * Get user order
      *
-     * @return User
+     * @return Collection
      */
     public function getUserOrders()
     {
         return $this->userRepository->setUser(Auth::user())->getUserOrders();
+    }
+
+    /**
+     * Get order by id
+     *
+     * @return Order
+     */
+    public function getOrderById(): Order
+    {
+        return $this->orderRepository
+            ->setUserId(Auth::user()->id)
+            ->setOrderId($this->orderId)
+            ->getOrderByIdAndUserId();
     }
 
     /**

@@ -32,4 +32,20 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class)->select(['id', 'order_id', 'quantity', 'product_id', 'price']);
     }
+
+    /**
+     * Get payment by order
+     */
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+    /**
+     * Get promotion code by order
+     */
+    public function promoCode()
+    {
+        return $this->belongsTo(PromotionCode::class);
+    }
 }

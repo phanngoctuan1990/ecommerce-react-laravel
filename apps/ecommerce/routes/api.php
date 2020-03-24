@@ -34,5 +34,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::delete('/wishlists/{product_id}', 'WishlistController@removeWishlist');
         Route::post('/wishlists/cart', 'WishlistController@wishlistToCart');
         Route::get('/users/order', 'OrderController@getUserOrders');
+        Route::get('/orders/{id}', 'OrderController@show');
     });
 });

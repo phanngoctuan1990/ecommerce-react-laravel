@@ -11,5 +11,5 @@ class PromotionCode extends Model
      *
      * @var string
      */
-    protected $table = "promotion_codes";
+    protected $table = 'promotion_codes';
 }

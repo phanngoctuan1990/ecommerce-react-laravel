@@ -5,6 +5,7 @@ use App\Image;
 use App\Product;
 use App\Category;
 use App\PaymentMethod;
+use App\PromotionCode;
 use App\ShippingOption;
 use Illuminate\Database\Seeder;
 
@@ -94,5 +95,12 @@ class DatabaseSeeder extends Seeder
             ['shipping_method' => 'DELIVERED', 'created_at' => $current, 'updated_at' => $current],
         ];
         ShippingOption::insert($shippingOptions);
+
+        PromotionCode::create([
+            'code' => 'ABCaswkCs43F9',
+            'discount' => 30,
+            'start_date' => $current,
+            'end_date' => $current,
+        ]);
     }
 }

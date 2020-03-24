@@ -23,4 +23,12 @@ class Payment extends Model
     protected $fillable = [
         'amount', 'status', 'time_stamp', 'payment_method_id'
     ];
+
+    /**
+     * Get payment method by payment
+     */
+    public function paymentMethodData()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }

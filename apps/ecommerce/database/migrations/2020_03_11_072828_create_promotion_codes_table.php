@@ -19,7 +19,7 @@ class CreatePromotionCodesTable extends Migration
             $table->unsignedInteger('discount')->default(0);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->string('used_by');
+            $table->string('used_by')->nullable();
             $table->timestamps();
         });
     }
