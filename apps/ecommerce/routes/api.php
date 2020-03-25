@@ -35,5 +35,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/wishlists/cart', 'WishlistController@wishlistToCart');
         Route::get('/users/order', 'OrderController@getUserOrders');
         Route::get('/orders/{id}', 'OrderController@show');
+        Route::post('/promotion/validate', 'PromotionController@validateCode');
     });
 });
