@@ -12,4 +12,12 @@ class PromotionCode extends Model
      * @var string
      */
     protected $table = 'promotion_codes';
+
+    /**
+     * Get user promotion code by promotion code
+     */
+    public function userPromotionCodes()
+    {
+        return $this->hasMany(UserPromotionCode::class);
+    }
 }
