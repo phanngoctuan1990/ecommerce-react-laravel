@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-class HomePage extends React.Component {
+class HomePage extends Component {
     render() {
         return (
             <div className="container">
